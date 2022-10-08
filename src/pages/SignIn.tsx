@@ -76,7 +76,19 @@ export default function SignIn() {
             </Col>
           </Row>
 
-          <Button>Enviar</Button>
+          <Button style={{ marginBottom: "0.8rem" }}>Enviar</Button>
+          <a
+            style={{
+              marginLeft: "19rem",
+              textDecoration: "none",
+              color: "#454545",
+              fontWeight: "bold",
+              borderBottom: "1px solid teal",
+            }}
+            href="/register"
+          >
+            Cadastre-se
+          </a>
         </form>
       </Container>
     </>

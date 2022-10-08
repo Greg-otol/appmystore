@@ -171,7 +171,19 @@ export default function SignUp() {
           </Col>
         </Row>
 
-        <Button>Cadastrar</Button>
+        <Button style={{ marginBottom: "0.8rem" }}>Cadastrar</Button>
+        <a
+          style={{
+            marginLeft: "21.5rem",
+            textDecoration: "none",
+            color: "#454545",
+            fontWeight: "bold",
+            borderBottom: "1px solid teal",
+          }}
+          href="/login"
+        >
+          Entrar
+        </a>
       </form>
       <ValidMessage>
         {status.type === "success" ? (
