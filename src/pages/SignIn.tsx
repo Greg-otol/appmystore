@@ -7,6 +7,7 @@ import {
   FormGroup,
   Button,
   Title,
+  ValidMessage,
 } from "../components/Layouts";
 import { ICredential } from "../interfaces/Credential";
 import { authLogin } from "../services/auth/authLogin";
@@ -15,6 +16,11 @@ export default function SignIn() {
   const [values, setValues] = useState<ICredential>({
     email: "",
     password: "",
+  });
+  // 1
+  const [status, setStatus] = useState({
+    type: "",
+    message: "",
   });
 
   const valueInput = useCallback(
@@ -29,17 +35,53 @@ export default function SignIn() {
     },
     [values]
   );
+
   const navigate = useNavigate();
 
   const login = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!validate()) return;
 
     authLogin(values.email, values.password);
 
     setTimeout(() => {
       navigate("/products");
     }, 2000);
+
+    const saveDataForm = true;
+
+    if (saveDataForm) {
+      setStatus({
+        type: "success",
+        message: "Cadastro realizado com sucesso!",
+      });
+      setValues({
+        email: "",
+        password: "",
+      });
+    } else {
+      setStatus({
+        type: "error",
+        message: "Erro: Cadastro não realizado!",
+      });
+    }
   };
+
+  function validate() {
+    if (!values.email)
+      return setStatus({
+        type: "error",
+        message: "O campo email é obrigatório!",
+      });
+    if (!values.password)
+      return setStatus({
+        type: "error",
+        message: "O campo senha é obrigatório!",
+      });
+
+    return true;
+  }
 
   return (
     <>
@@ -90,6 +132,18 @@ export default function SignIn() {
             Cadastre-se
           </a>
         </form>
+        <ValidMessage>
+          {status.type === "success" ? (
+            <p style={{ color: "green" }}>{status.message}</p>
+          ) : (
+            ""
+          )}
+          {status.type === "error" ? (
+            <p style={{ color: "#ff0000" }}>{status.message}</p>
+          ) : (
+            ""
+          )}
+        </ValidMessage>
       </Container>
     </>
   );
