@@ -50,6 +50,7 @@ export const ProductCreate = () => {
     event:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLSelectElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
   ) {
     setModel({
       ...model,
