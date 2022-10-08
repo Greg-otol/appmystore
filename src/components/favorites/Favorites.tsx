@@ -13,6 +13,7 @@ import { useContext } from "react";
 import { Header } from "../header/Header";
 import { IProduct } from "../../interfaces/IProduct";
 import { FavoriteContext } from "../../context/Favorites/FavoriteContext";
+import Footer from "../footer/Footer";
 
 export const Favorites = (product: IProduct) => {
   const { favorites, setFavorites } = useContext(FavoriteContext);
@@ -48,6 +49,7 @@ export const Favorites = (product: IProduct) => {
           );
         })}
       </Cards>
+      <Footer/>
     </>
   );
 };

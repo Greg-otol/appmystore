@@ -213,3 +213,24 @@ export const Div = styled.div`
   display: flex;
   gap: 20px;
 `;
+
+export const CardFooter = styled.div`
+background-color: teal;
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 1rem;
+margin-top: auto;
+
+p {
+  font-size: min(1rem, 3.2vw);
+  color: #fff;
+  margin-right: 2rem;
+}
+
+img {
+  width: 2rem;
+  margin: 0.2rem;
+}
+`;
+

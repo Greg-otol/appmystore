@@ -12,6 +12,8 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import { ICategory } from "../../interfaces/Category";
 import { Api } from "../../services/api/Api";
+import { Header } from "../header/Header";
+import Footer from "../footer/Footer";
 
 export const CategoryUpdate = () => {
   const { id } = useParams();
@@ -100,63 +102,69 @@ export const CategoryUpdate = () => {
   }
 
   const deleteCategory = () => {
-    Api.delete(`/categories/${id}`)
+    Api.delete(`/categories/${id}`);
     setTimeout(() => {
       navigate("/categories");
     }, 2000);
-  }
+  };
 
   return (
-    <Container>
-      <Title style={{ textAlign: "center" }}>Editar/Deletar Categoria</Title>
+    <>
+      <Header />
+      <Container style={{marginBottom: "7rem"}}>
+        <Title style={{ textAlign: "center" }}>Editar/Deletar Categoria</Title>
 
-      <form onSubmit={onSubmit}>
-        <Row>
-          <Col>
-            <FormGroup>
-              <input
-                name="name"
-                type="text"
-                defaultValue={category.name}
-                onChange={(e) => updateModel(e)}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col>
-            <FormGroup>
-              <div
-                style={{ display: "flex", flexDirection: "row", gap: "1rem" }}
-              >
-                Ativo / Inativo:
+        <form onSubmit={onSubmit}>
+          <Row>
+            <Col>
+              <FormGroup>
                 <input
-                  name="active"
-                  type="checkbox"
-                  checked={model.active}
+                  name="name"
+                  type="text"
+                  defaultValue={category.name}
                   onChange={(e) => updateModel(e)}
                 />
-              </div>
-            </FormGroup>
-          </Col>
-        </Row>
+              </FormGroup>
+            </Col>
+          </Row>
 
-        <Button>Cadastrar</Button>
-        <Button style={{marginTop: "1rem"}} onClick={deleteCategory}>Deletar</Button>
-      </form>
-      <ValidMessage>
-        {status.type === "success" ? (
-          <p style={{ color: "green" }}>{status.message}</p>
-        ) : (
-          ""
-        )}
-        {status.type === "error" ? (
-          <p style={{ color: "#ff0000" }}>{status.message}</p>
-        ) : (
-          ""
-        )}
-      </ValidMessage>
-    </Container>
+          <Row>
+            <Col>
+              <FormGroup>
+                <div
+                  style={{ display: "flex", flexDirection: "row", gap: "1rem" }}
+                >
+                  Ativo / Inativo:
+                  <input
+                    name="active"
+                    type="checkbox"
+                    checked={model.active}
+                    onChange={(e) => updateModel(e)}
+                  />
+                </div>
+              </FormGroup>
+            </Col>
+          </Row>
+
+          <Button>Salvar</Button>
+          <Button style={{ marginTop: "1rem" }} onClick={deleteCategory}>
+            Deletar
+          </Button>
+        </form>
+        <ValidMessage>
+          {status.type === "success" ? (
+            <p style={{ color: "green" }}>{status.message}</p>
+          ) : (
+            ""
+          )}
+          {status.type === "error" ? (
+            <p style={{ color: "#ff0000" }}>{status.message}</p>
+          ) : (
+            ""
+          )}
+        </ValidMessage>
+      </Container>
+      <Footer/>
+    </>
   );
 };

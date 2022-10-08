@@ -16,6 +16,7 @@ import favorite from "../../assets/img/favorito.png";
 import favorite2 from "../../assets/img/favorito2.png";
 import { FavoriteContext } from "../../context/Favorites/FavoriteContext";
 import { Link } from "react-router-dom";
+import Footer from "../footer/Footer";
 
 export const ProductsList = (product: IProduct) => {
   const { favorites, setFavorites } = useContext(FavoriteContext);
@@ -67,6 +68,7 @@ export const ProductsList = (product: IProduct) => {
           );
         })}
       </Cards>
+      <Footer/>
     </>
   );
 };

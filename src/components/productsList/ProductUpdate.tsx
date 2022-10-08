@@ -7,12 +7,15 @@ import {
   Button,
   Title,
   ValidMessage,
+  ProductActive,
 } from "../../components/Layouts";
 import { useNavigate, useParams } from "react-router-dom";
 import { getCategories } from "../../services/categoriesService/categoriesGetAll";
 import { IProduct } from "../../interfaces/IProduct";
 import { ICategory } from "../../interfaces/Category";
 import { Api } from "../../services/api/Api";
+import { Header } from "../header/Header";
+import Footer from "../footer/Footer";
 //import { updateProduct } from "../../services/productsService/productUpdate";
 
 export const ProductUpdate = () => {
@@ -75,10 +78,9 @@ export const ProductUpdate = () => {
 
   async function onSubmit(e: React.ChangeEvent<HTMLInputElement> | any) {
     e.preventDefault();
-    
 
     if (!validate()) return;
-    
+
     Api.put(`/products/${id}`, model)
       .then((data) => {
         setTimeout(() => {
@@ -144,117 +146,189 @@ export const ProductUpdate = () => {
   }
 
   return (
-    <Container>
-      <Title>Editar Produto</Title>
+    <>
+      <Header />
+      <Container style={{marginBottom: "2rem"}}>
+        <Title style={{ textAlign: "center" }}>Editar Produto</Title>
 
-      <form onSubmit={onSubmit}>
-        <Row>
-          <Col>
-            <FormGroup>
-              <input
-                name="name"
-                type="text"
-                defaultValue={product.name}
-                onChange={(e) => updateModel(e)}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
-        <div>
-          <label htmlFor="">Categória: </label>
-          <select name="categoryName" onChange={(e) => updateModel(e)}>
-            {categories.map((category) => {
-              return (
-                <>
-                  {/* <option value={category.id}>{product.categoryName}</option> */}
+        <form onSubmit={onSubmit}>
+          <Row>
+            <Col>
+              <FormGroup>
+                <p
+                  style={{
+                    borderBottom: "1px solid teal",
+                    width: "11%",
+                    marginBottom: "2px",
+                  }}
+                >
+                  Nome
+                </p>
+                <input
+                  name="name"
+                  type="text"
+                  defaultValue={product.name}
+                  onChange={(e) => updateModel(e)}
+                />
+              </FormGroup>
+            </Col>
+          </Row>
+          <div>
+            <p
+              style={{
+                borderBottom: "1px solid teal",
+                width: "18%",
+                marginBottom: "2px",
+              }}
+            >
+              Categoria
+            </p>
+            <select
+              style={{ width: "100%", height: "30px" }}
+              name="categoryName"
+              onChange={(e) => updateModel(e)}
+            >
+              <option value="">Selecione a Categoria</option>
+              {categories.map((category) => {
+                return (
                   <option key={category.id} value={category.name}>
                     {category.name}
                   </option>
-                </>
-              );
-            })}
-          </select>
-        </div>
+                );
+              })}
+            </select>
+          </div>
 
-        <Row>
-          <Col>
-            <FormGroup>
-              <input
-                name="description"
-                type="text"
-                defaultValue={product.description}
-                onChange={(e) => updateModel(e)}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
+          <Row>
+            <Col>
+              <FormGroup>
+                <p
+                  style={{
+                    borderBottom: "1px solid teal",
+                    width: "18%",
+                    marginBottom: "2px",
+                  }}
+                >
+                  Descrição
+                </p>
+                <input
+                  name="description"
+                  type="text"
+                  defaultValue={product.description}
+                  onChange={(e) => updateModel(e)}
+                />
+              </FormGroup>
+            </Col>
+          </Row>
 
-        <Row>
-          <Col>
-            <FormGroup>
-              <input
-                name="price"
-                type="number"
-                defaultValue={product.price}
-                onChange={(e) => updateModel(e)}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
+          <Row>
+            <Col>
+              <FormGroup>
+                <p
+                  style={{
+                    borderBottom: "1px solid teal",
+                    width: "11%",
+                    marginBottom: "2px",
+                  }}
+                >
+                  Preço
+                </p>
+                <input
+                  name="price"
+                  type="number"
+                  defaultValue={product.price}
+                  onChange={(e) => updateModel(e)}
+                />
+              </FormGroup>
+            </Col>
+          </Row>
 
-        <Row>
-          <Col>
-            <FormGroup>
-              <textarea
-                style={{ width: "100%", height: "70px", resize: "none" }}
-                name="imageUrl"
-                defaultValue={product.imageUrl}
-                onChange={(e) => updateModel(e)}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
+          <Row>
+            <Col>
+              <FormGroup>
+                <p
+                  style={{
+                    borderBottom: "1px solid teal",
+                    width: "27%",
+                    marginBottom: "2px",
+                  }}
+                >
+                  Url da Imagem
+                </p>
+                <textarea
+                  style={{ width: "100%", height: "70px", resize: "none" }}
+                  name="imageUrl"
+                  defaultValue={product.imageUrl}
+                  onChange={(e) => updateModel(e)}
+                />
+              </FormGroup>
+            </Col>
+          </Row>
 
-        <Row>
-          <Col>
-            <FormGroup>
-              <input
-                name="hasStock"
-                type="checkbox"
-                checked={model.hasStock}
-                onChange={(e) => updateModel(e)}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
+          <Row>
+            <Col>
+              <div>
+                <ProductActive>
+                  <p
+                    style={{
+                      borderBottom: "1px solid teal",
+                      width: "24%",
+                      marginBottom: "2px",
+                    }}
+                  >
+                    Tem estoque?
+                  </p>
+                  <input
+                    name="hasStock"
+                    type="checkbox"
+                    checked={model.hasStock}
+                    onChange={(e) => updateModel(e)}
+                  />
+                </ProductActive>
+              </div>
+            </Col>
+          </Row>
 
-        <Row>
-          <Col>
-            <FormGroup>
-              <input
-                name="active"
-                type="checkbox"
-                checked={model.active}
-                onChange={(e) => updateModel(e)}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
+          <Row>
+            <Col>
+              <div style={{ marginTop: "1rem" }}>
+                <ProductActive>
+                  <p
+                    style={{
+                      borderBottom: "1px solid teal",
+                      width: "21%",
+                      marginBottom: "2px",
+                    }}
+                  >
+                    Ativo/Inativo:
+                  </p>
+                  <input
+                    name="active"
+                    type="checkbox"
+                    checked={model.active}
+                    onChange={(e) => updateModel(e)}
+                  />
+                </ProductActive>
+              </div>
+            </Col>
+          </Row>
 
-        <Button>Cadastrar</Button>
-      </form>
-      <ValidMessage>
-        {status.type === "success" ? (
-          <p style={{ color: "green" }}>{status.message}</p>
-        ) : (
-          ""
-        )}
-        {status.type === "error" ? (
-          <p style={{ color: "#ff0000" }}>{status.message}</p>
-        ) : (
-          ""
-        )}
-      </ValidMessage>
-    </Container>
+          <Button style={{ marginTop: "1rem" }}>Salvar</Button>
+        </form>
+        <ValidMessage>
+          {status.type === "success" ? (
+            <p style={{ color: "green" }}>{status.message}</p>
+          ) : (
+            ""
+          )}
+          {status.type === "error" ? (
+            <p style={{ color: "#ff0000" }}>{status.message}</p>
+          ) : (
+            ""
+          )}
+        </ValidMessage>
+      </Container>
+      <Footer/>
+    </>
   );
 };

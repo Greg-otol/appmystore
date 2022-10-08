@@ -1,6 +1,7 @@
 import { Button, Container, Div, StyleHeader } from "../Layouts";
 import home from "../../assets/img/home.png";
 import { Link } from "react-router-dom";
+import Footer from "../footer/Footer";
 
 export const Config = () => {
   return (
@@ -17,7 +18,7 @@ export const Config = () => {
           </Link>
         </Div>
       </StyleHeader>
-      <Container style={{ textAlign: "center" }}>
+      <Container style={{ textAlign: "center", marginBottom: "14rem" }}>
         <h2 style={{ padding: "1rem" }}>Gerenciamento</h2>
         <Link
           style={{ textDecoration: "none", width: "100%" }}
@@ -32,6 +33,7 @@ export const Config = () => {
           <Button style={{ marginTop: "1rem" }}>Gerenciar Categorias</Button>
         </Link>
       </Container>
+      <Footer/>
     </>
   );
 };
