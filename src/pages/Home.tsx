@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { Api } from "../services/api/Api";
 import login from "../assets/img/login.png";
 import { Link, useNavigate } from "react-router-dom";
+import Footer from "../components/footer/Footer";
 
 export const Home = () => {
 
@@ -48,11 +49,14 @@ export const Home = () => {
               <Img src={product.imageUrl} alt="Product" />
               <Frete>Frete Grátis</Frete>
               <ProductPrice>R$ {product.price.toFixed(2)}</ProductPrice>
-              <Button>Comprar</Button>
+              <Link style={{textDecoration: "none", width: "100%"}} to={`/login`}>
+                <Button>Comprar</Button>
+              </Link>
             </Card>
           );
         })}
       </Cards>
+      <Footer/>
     </>
   );
 };
