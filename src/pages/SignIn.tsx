@@ -1,3 +1,4 @@
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Container,
@@ -7,27 +8,45 @@ import {
   Button,
   Title,
 } from "../components/Layouts";
-import { useAuth } from "../context/AuthProvider/useAuth";
+import { ICredential } from "../interfaces/Credential";
+import { authLogin } from "../services/auth/authLogin";
 
 export default function SignIn() {
-  const auth = useAuth()
+  const [values, setValues] = useState<ICredential>({
+    email: "",
+    password: "",
+  });
+
+  const valueInput = useCallback(
+    (event: React.FormEvent<HTMLInputElement>) => {
+      const targetInput = event.currentTarget;
+      const { value, name } = targetInput;
+
+      setValues({
+        ...values,
+        [name]: value,
+      });
+    },
+    [values]
+  );
   const navigate = useNavigate();
 
-  async function onFinish(values: {email: string, password: string}) {
-    try {
-      await auth.authenticate(values.email, values.password)
+  const login = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-      navigate("/")
-    } catch (error) {
-      console.log("Invalid email or password");
-    }    
-  }
+    authLogin(values.email, values.password);
+
+    setTimeout(() => {
+      navigate("/products");
+    }, 2000);
+  };
+
   return (
     <>
       <Container>
         <Title>Entrar</Title>
 
-        <form name="auth" onSubmit={() => {}}>
+        <form name="auth" onSubmit={login}>
           <Row>
             <Col>
               <FormGroup>
@@ -35,6 +54,8 @@ export default function SignIn() {
                   name="email"
                   type="email"
                   placeholder="Digite seu E-mail"
+                  onChange={valueInput}
+                  value={values.email}
                 />
               </FormGroup>
             </Col>
@@ -48,6 +69,8 @@ export default function SignIn() {
                   name="password"
                   type="password"
                   placeholder="Digite sua senha"
+                  onChange={valueInput}
+                  value={values.password}
                 />
               </FormGroup>
             </Col>

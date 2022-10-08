@@ -1,11 +1,11 @@
-import { FavoriteProvider } from "./context/Favorites/context/FavoriteContext";
+import { FavoriteProvider } from "./context/Favorites/FavoriteContext";
 import AppRoutes from "./routes/routes";
 
 function App() {
   return (
     <>
-    <FavoriteProvider>
-      <AppRoutes />
+      <FavoriteProvider>
+        <AppRoutes />
       </FavoriteProvider>
     </>
   );

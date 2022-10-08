@@ -9,12 +9,11 @@ import {
   ValidMessage,
 } from "../components/Layouts";
 import { Api } from "../services/api/Api";
-import { ICreateUser } from "../context/RegisterProvider/types";
 import { useNavigate } from "react-router-dom";
-import { useTimeout } from "usehooks-ts";
+import { IRegistration } from "../interfaces/Registration";
 
 export default function SignUp() {
-  const [values, setValues] = useState<ICreateUser>({
+  const [values, setValues] = useState<IRegistration>({
     name: "",
     cpf: "",
     email: "",
@@ -39,9 +38,7 @@ export default function SignUp() {
     [values]
   );
   const navigate = useNavigate();
-  // const routeLogin = () => {
-  //   navigate("/authenticate");
-  // };
+
   const addClient = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -55,7 +52,7 @@ export default function SignUp() {
     })
       .then((data) => {
         setTimeout(() => {
-          navigate("/authenticate");
+          navigate("/login");
         }, 2000);
       })
       .catch(() => {

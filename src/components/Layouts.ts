@@ -53,6 +53,7 @@ export const Button = styled.button`
   border: 1px solid teal;
   border-radius: 5px;
   color: black;
+  text-decoration: none;
   display: block;
   font-size: 1.25rem;
   padding: 10px;
@@ -96,6 +97,43 @@ export const Card = styled.div`
   }
 `;
 
+export const Cardcategories = styled.div`
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid teal;
+  border-radius: 10px;
+  text-align: center;
+  transition: all 0.8s ease-out;
+  cursor: pointer;
+  color: #454545;
+
+  &:hover {
+    box-shadow: 3px 3px 3px 3px #00000021;
+    background-color: teal;
+    color: white;
+  }
+`;
+
+export const CardDetails = styled.div`
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid teal;
+  border-radius: 10px;
+  text-align: center;
+`;
+
 export const Img = styled.img`
   width: 100%;
   border-radius: 10px;
@@ -108,6 +146,20 @@ export const ProductName = styled.h2`
   color: #555555;
   border-bottom: 1px solid teal;
   margin-bottom: auto;
+`;
+
+export const ProductDescription = styled.h3`
+  height: 46px;
+  margin: 14px 0;
+  font-size: 14px;
+  color: #555555;
+  border-bottom: 1px solid teal;
+  margin-bottom: auto;
+`;
+
+export const ProductActive = styled.h3`
+  font-size: 14px;
+  color: #555555;
 `;
 
 export const Frete = styled.p`

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { IProduct } from "../../AuthProvider/types";
+import { IProduct } from "../../interfaces/IProduct";
 
 type BoxProps = {
-    children: React.ReactNode; // 👈️ type children
+    children: React.ReactNode;
   };
 
 interface IfavoriteContext {

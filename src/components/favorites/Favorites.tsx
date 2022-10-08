@@ -7,12 +7,12 @@ import {
   ProductPrice,
   Frete,
   ImgFavorite,
-} from "../../components/Layouts";
+} from "../Layouts";
 import favorite from "../../assets/img/favorito.png";
 import { useContext } from "react";
-import { Header } from "../../components/header/Header";
-import { IFavorites, IProduct } from "../AuthProvider/types";
-import { FavoriteContext } from "./context/FavoriteContext";
+import { Header } from "../header/Header";
+import { IProduct } from "../../interfaces/IProduct";
+import { FavoriteContext } from "../../context/Favorites/FavoriteContext";
 
 export const Favorites = (product: IProduct) => {
   const { favorites, setFavorites } = useContext(FavoriteContext);
@@ -23,7 +23,7 @@ export const Favorites = (product: IProduct) => {
   };
 
   const isFavorite = (productName: string) => favorites.some((prod) => prod.name == productName);
-  console.log(isFavorite)
+  
   return (
     <>
       <Header />
