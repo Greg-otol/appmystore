@@ -17,7 +17,7 @@ export default function SignIn() {
     email: "",
     password: "",
   });
-  // 1
+
   const [status, setStatus] = useState({
     type: "",
     message: "",
@@ -40,7 +40,7 @@ export default function SignIn() {
 
   const login = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+  
     if (!validate()) return;
 
     authLogin(values.email, values.password);
@@ -54,7 +54,7 @@ export default function SignIn() {
     if (saveDataForm) {
       setStatus({
         type: "success",
-        message: "Cadastro realizado com sucesso!",
+        message: "LogIn realizado com sucesso!",
       });
       setValues({
         email: "",
@@ -63,7 +63,7 @@ export default function SignIn() {
     } else {
       setStatus({
         type: "error",
-        message: "Erro: Cadastro não realizado!",
+        message: "Erro: LogIn não realizado!",
       });
     }
   };
